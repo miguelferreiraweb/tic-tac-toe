@@ -1,0 +1,76 @@
+.container {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    margin-top: 20vh;
+
+    .start {
+        margin-bottom: 5vh;
+    }
+
+    .restart {
+        margin-top: 5vh;
+    }
+
+    .boardContainer {
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+
+        .cell {
+            border: 3px solid white;
+            background-color: unset;
+            font-size: 50px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .cell-0 {
+            @extend .cell;
+            border-top: none;
+            border-left: none;
+        }
+        
+        .cell-1 {
+            @extend .cell;
+            border-top: none;
+        }
+        
+        .cell-2 {
+            @extend .cell-1;
+            border-right: none;
+        }
+        
+        .cell-3 {
+            @extend .cell;
+            border-left: none;
+        }
+        
+        .cell-4 {
+            @extend .cell;
+        }
+        
+        .cell-5 {
+            @extend .cell;
+            border-right: none;
+        }
+        
+        .cell-6 {
+            @extend .cell;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .cell-7 {
+            @extend .cell;
+            border-bottom: none;
+        }
+        
+        .cell-8 {
+            @extend .cell-7;
+            border-right: none;
+        }
+    }
+
+}
