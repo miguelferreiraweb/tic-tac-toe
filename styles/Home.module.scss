@@ -1,3 +1,6 @@
+$start_margin_bottom: 5vh;
+$cell_width: 100px;
+
 .container {
     display: grid;
     justify-items: center;
@@ -5,11 +8,11 @@
     margin-top: 20vh;
 
     .start {
-        margin-bottom: 5vh;
+        margin-bottom: $start_margin_bottom;
     }
 
     .restart {
-        margin-top: 5vh;
+        margin-top: $start_margin_bottom;
     }
 
     .boardContainer {
@@ -22,8 +25,8 @@
             border: 3px solid white;
             background-color: unset;
             font-size: 50px;
-            width: 100px;
-            height: 100px;
+            width: $cell_width;
+            height: $cell_width;
         }
 
         .cell-0 {
