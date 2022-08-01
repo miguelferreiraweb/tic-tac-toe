@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-import HeadComponent from '../components/HeadComponent/HeadComponent';
-import styles from '../styles/Home.module.scss';
-import {BOARD_CELLS, PLAYER_1, PLAYER_2} from '../utils/globals';
+import HeadComponent from '@/components/HeadComponent/HeadComponent';
+import styles from '@/styles/Home.module.scss';
+import {BOARD_CELLS, PLAYER_1, PLAYER_2} from '@/utils/globals';
 
 
 const Home: NextPage = () => {
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
 
   const renderBoard = () => 
       <div className={styles.boardContainer}>
-        {[...Array(BOARD_CELLS)].map((item, index : number) => 
+        {[...Array(BOARD_CELLS)].map((item: any, index : number) => 
           <button 
             key={uuidv4()}
             className={styles[`cell-${index}`]}
@@ -52,7 +52,9 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.start}>Its turn of {currentPlayer}</div> 
         <div>{renderBoard()}</div>
-        <div className={styles.restart} onClick={handleRestartGameClick}>Restart Game</div>
+        <div className={styles.restart}>
+          <button onClick={handleRestartGameClick}>Restart Game</button>
+        </div>
       </main>
     </div>
   )
