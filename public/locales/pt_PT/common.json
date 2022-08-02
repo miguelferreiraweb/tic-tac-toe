@@ -1,8 +1,10 @@
 {
     "its-turn-of": "É a vez do Jogador",
     "restart": "Reiniciar Jogo",
+    "restarting": "A reiniciar em...",
     "latest-results": "Ultimos Resultados",
     "player" : "Jogador",
+    "won": "venceu",
     "player-x-wins": "Jogador X vitórias",
     "player-o-wins": "Jogador O vitórias",
     "draws": "Empates ",

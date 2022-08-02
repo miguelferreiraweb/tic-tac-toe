@@ -6,23 +6,44 @@ import { v4 as uuidv4 } from 'uuid';
 
 import HeadComponent from '@/components/HeadComponent/HeadComponent';
 import styles from '@/styles/Home.module.scss';
-import {BOARD_CELLS, PLAYER_O,PLAYER_X} from '@/utils/globals';
+import {calculateRoundResult} from '@/utils/calculateRoundResult';
+import {BOARD_CELLS, DRAW, PENDING, PLAYER_O, PLAYER_X, WIN} from '@/utils/globals';
 
 const Home: NextPage = () => {
-  const boardInitialState: Array<String> = ['','','','','','','','',''];
+  const boardInitialState: Array<string> = ['','','','','','','','',''];
   const [board, setBoard] = useState(boardInitialState);
-  const [currentPlayer, seCurrentPlayer] = useState(PLAYER_X);
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
+  const [isRoundFinished, setIsRoundFinished] = useState(false);
   const { t } = useTranslation();
 
-  const updateBoard = (index: number) => {
-    let updatedBoard = [...board];
+  const updateBoard = (index: number): void => {
+    let updatedBoard: Array<string> = [...board];
     updatedBoard[index] = currentPlayer;
     setBoard(updatedBoard);
+    const result: string = calculateRoundResult(updatedBoard);
+
+    switch(result){
+      case WIN:
+        console.log('winner');
+        setIsRoundFinished(true);
+        break;
+      case DRAW:
+        console.log('draw');
+        setIsRoundFinished(true);
+        break;
+      case PENDING:
+        updateNextPlayerTurn();
+        break;
+      default:
+        updateNextPlayerTurn();
+        break;
+    }
+
   };
 
-  const updateNextPlayerTurn = () => currentPlayer === PLAYER_X ? seCurrentPlayer(PLAYER_O) : seCurrentPlayer(PLAYER_X);
+  const updateNextPlayerTurn = (): void => currentPlayer === PLAYER_X ? setCurrentPlayer(PLAYER_O) : setCurrentPlayer(PLAYER_X);
 
-  const isCellEmpty = (index: number) => !board[index];
+  const isCellEmpty = (index: number): boolean => !board[index];
 
   const renderBoard = () => 
       <div className={styles.boardContainer}>
@@ -36,30 +57,31 @@ const Home: NextPage = () => {
 
   // Handlers    
 
-  const handleCellClick = (index: number) => {
+  const handleCellClick = (index: number): void => {
     if(isCellEmpty(index)){
       updateBoard(index);
-      updateNextPlayerTurn();
     }
   };
 
-  const handleRestartGameClick = () => {
+  const handleRestartGameClick = (): void => {
     if(!isBoardEmpty()){
       setBoard(boardInitialState);
-      seCurrentPlayer(PLAYER_X);
+      setCurrentPlayer(PLAYER_X);
     }
   };
 
-  const isBoardEmpty = () => !board.includes(PLAYER_X) && !board.includes(PLAYER_O);
+  const isBoardEmpty = (): boolean => !board.includes(PLAYER_X) && !board.includes(PLAYER_O);
 
   return (
     <div className={styles.container}>
       <HeadComponent />
       <main className={styles.main}>
-        <div className={styles.start}>{t('its-turn-of')} {currentPlayer}</div> 
+        <div className={styles.start}>
+          { isRoundFinished ? <>{t('player')}&nbsp;{currentPlayer} {t('won')}! </> : <>{t('its-turn-of')} {currentPlayer}</>}
+        </div> 
         <div>{renderBoard()}</div>
         <div className={styles.restart}>
-          <button onClick={handleRestartGameClick} disabled={isBoardEmpty()}>{t('restart')}</button>
+          <button onClick={handleRestartGameClick} disabled={isBoardEmpty() || isRoundFinished}>{t('restart')}</button>
         </div>
         <div className={styles.restart}>
           {t('latest-results')}

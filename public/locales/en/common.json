@@ -1,8 +1,10 @@
 {
     "its-turn-of": "It's turn of Player ",
     "restart": "Restart Game",
+    "restarting": "Restarting in...",
     "latest-results": "Latest Results",
     "player" : "Player",
+    "won": "won",
     "player-x-wins": "Player X wins",
     "player-o-wins": "Player O wins",
     "draws": "Draws ",
