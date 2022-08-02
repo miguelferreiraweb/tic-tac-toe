@@ -1,5 +1,8 @@
-# dependencies
+#dependencies
 /node_modules
 
 #build
 .next
+
+#misc
+.vscode
