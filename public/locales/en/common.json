@@ -1,5 +1,5 @@
 {
-    "its-turn-of": "It's turn of Player ",
+    "its-turn-of": "Ready? It's turn of Player",
     "restart": "Restart Game",
     "restarting": "Restarting in...",
     "latest-results": "Latest Results",
@@ -8,6 +8,7 @@
     "player-x-wins": "Player X wins",
     "player-o-wins": "Player O wins",
     "draws": "Draws ",
+    "its-a-draw" : "It's a draw!",
     "head": {
         "title": "Tic tac toe",
         "content": "Tic tac toe app"

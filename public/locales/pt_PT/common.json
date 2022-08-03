@@ -1,5 +1,5 @@
 {
-    "its-turn-of": "É a vez do Jogador",
+    "its-turn-of": "Preparado? É a vez do Jogador",
     "restart": "Reiniciar Jogo",
     "restarting": "A reiniciar em...",
     "latest-results": "Ultimos Resultados",
@@ -8,6 +8,7 @@
     "player-x-wins": "Jogador X vitórias",
     "player-o-wins": "Jogador O vitórias",
     "draws": "Empates ",
+    "its-a-draw" : "Temos um empate!",
     "head": {
         "title": "Jogo do galo",
         "content": "Jogo do galo app"
