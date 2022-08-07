@@ -8,12 +8,19 @@ import { v4 as uuidv4 } from 'uuid';
 import HeadComponent from '@/components/HeadComponent/HeadComponent';
 import styles from '@/styles/Home.module.scss';
 import {calculateRoundResult} from '@/utils/calculateRoundResult';
-import {BOARD_CELLS, DRAW, PENDING, PLAYER_O, PLAYER_X, WIN} from '@/utils/globals';
-
-const BOARD_INITIAL_STATE: Array<string> = ['','','','','','','','',''];
-const INITIAL_RESTART_COUNTER: number = 5;
+import {
+  BOARD_CELLS,
+  DRAW,
+  INITIAL_RESTART_COUNTER,
+  LOCALES,
+  PENDING,
+  PLAYER_O,
+  PLAYER_X,
+  WIN, 
+  } from '@/utils/globals';
 
 const Home: NextPage = () => {
+  const BOARD_INITIAL_STATE: Array<string> = ['','','','','','','','',''];
   const [board, setBoard] = useState(BOARD_INITIAL_STATE);
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
   const [isRoundFinished, setIsRoundFinished] = useState(false);
@@ -124,7 +131,7 @@ const Home: NextPage = () => {
             })} 
             disabled={isBoardEmpty()}>{ isRoundFinished ? <>{t('restarting')} {restartCounter}</> : t('restart')}</button>
         </div>
-        <div className={styles.restart}>
+        <div className={styles.results}>
           {t('latest-results')}
           <p>{t('player-x-wins')} - 0</p>
           <p>{t('player-o-wins')} - 0</p>
@@ -137,7 +144,7 @@ const Home: NextPage = () => {
 
 export const getStaticProps = async ({ locale } : any) => ({
   props: {
-    ...await serverSideTranslations(locale, ['common']),
+    ...await serverSideTranslations(locale, [LOCALES.COMMON]),
   },
 });
 
