@@ -16,7 +16,7 @@ import {
   PENDING,
   PLAYER_O,
   PLAYER_X,
-  WIN, 
+  WIN,
   } from '@/utils/globals';
 
 const Home: NextPage = () => {
@@ -30,9 +30,9 @@ const Home: NextPage = () => {
 
   useEffect(()=> {
     let intervalId: any;
-    
+
     if(isRoundFinished){
-      intervalId = setInterval(()=> { 
+      intervalId = setInterval(()=> {
         setRestartCounter((restartCounter)=> restartCounter-1);
 
         if(restartCounter <= 0){
@@ -81,7 +81,7 @@ const Home: NextPage = () => {
     setIsRoundFinished(false);
   };
 
-  // Handlers    
+  // Handlers
 
   const handleCellClick = (index: number): void => {
     if(isCellEmpty(index) && !isRoundFinished){
@@ -97,20 +97,20 @@ const Home: NextPage = () => {
 
   // Renders
 
-  const renderBoard = () => 
+  const renderBoard = () =>
   <div className={styles.boardContainer}>
-    {[...Array(BOARD_CELLS)].map((item: any, index : number) => 
-      <button 
+    {[...Array(BOARD_CELLS)].map((item: any, index : number) =>
+      <button
         key={uuidv4()}
         className={styles[`cell-${index}`]}
         onClick={()=> handleCellClick(index)}>{renderCellItem(board[index])}</button>)
     }
   </div>;
 
-  const renderCellItem = (item: string) => 
+  const renderCellItem = (item: string) =>
     item === PLAYER_X ? <span className={styles.playerX}>{item}</span> : <span className={styles.playerO}>{item}</span>;
 
-  const renderRoundStatusMsg = () => roundStatus === DRAW ? 
+  const renderRoundStatusMsg = () => roundStatus === DRAW ?
     <span>{t('its-a-draw')}</span> : <span className={styles.winnerText}>{t('player')}&nbsp;{currentPlayer} {t('won')}! </span>;
 
   return (
@@ -119,16 +119,16 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.start}>
           { isRoundFinished ? renderRoundStatusMsg() : <>{t('its-turn-of')} {currentPlayer}!</>}
-        </div> 
+        </div>
         <div>{renderBoard()}</div>
         <div className={styles.restart}>
-          <button 
+          <button
             onClick={handleRestartGameClick}
             className={clsx({
                 [styles.restartBtn] : !isBoardEmpty(),
                 [styles.restartBtnDisabled] : isBoardEmpty(),
                 [styles.autoRestartBtn]: isRoundFinished
-            })} 
+            })}
             disabled={isBoardEmpty()}>{ isRoundFinished ? <>{t('restarting')} {restartCounter}</> : t('restart')}</button>
         </div>
         <div className={styles.results}>
