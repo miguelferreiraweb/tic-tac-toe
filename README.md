@@ -15,6 +15,5 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 ## Preview
 
-![Screenshot](/screenshots/player_turn.png)
-
-![Screenshot](/screenshots/victory.png)
+<img src="/screenshots/player_turn.png" width="50%" height="50%" />
+<img src="/screenshots/victory.png" width="50%" height="50%" />
