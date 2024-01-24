@@ -20,7 +20,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 'lts'
+        node-version: '20.9.0'
 
     - name: Install pnpm & install dependencies
       run: npm install -g pnpm && pnpm install
