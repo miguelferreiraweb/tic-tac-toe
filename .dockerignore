@@ -1,0 +1,5 @@
+# files to ignore while copying to the image file
+node_modules
+Dockerfile
+.dockerignore
+README.md

@@ -1,11 +1,11 @@
 import clsx from 'clsx';
+import HeadComponent from 'components/HeadComponent/HeadComponent';
 import type { NextPage } from 'next'
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect,useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-import HeadComponent from '@/components/HeadComponent/HeadComponent';
 import styles from '@/styles/Home.module.scss';
 import {calculateRoundResult} from '@/utils/calculateRoundResult';
 import {
