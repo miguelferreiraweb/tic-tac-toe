@@ -22,8 +22,8 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install dependencies
-      run: pnpm install
+    - name: Install pnpm & install dependencies
+      run: npm install -g pnpm && pnpm install
 
     - name: Build application
       run: pnpm run build
