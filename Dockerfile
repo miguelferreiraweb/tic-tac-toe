@@ -15,7 +15,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm i -g pnpm
 
 # Install dependencies
-RUN pnpm ci
+RUN pnpm i --frozen-lockfile
 
 # Copy the current directory contents into the container at /app
 COPY . .
