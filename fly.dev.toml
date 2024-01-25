@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for tic-tac-toe-nextjs on 2024-01-24T15:08:42Z
+# fly.toml app configuration file generated for tic-tac-toe-dev on 2024-01-25T13:37:09Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "tic-tac-toe-nextjs"
+app = "tic-tac-toe-dev"
 primary_region = "mad"
 
 [build]

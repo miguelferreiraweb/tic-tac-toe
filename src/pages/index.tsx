@@ -43,6 +43,7 @@ const Home: NextPage = () => {
       }, 1000);
     }
     return () => clearInterval(intervalId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRoundFinished, restartCounter]);
 
   const updateBoard = (index: number): void => {
