@@ -6,12 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check '**/*.{scss,css,ts,tsx}'",
+    "format:fix": "prettier --write '**/*.{scss,css,ts,tsx}'"
   },
   "dependencies": {
     "clsx": "^1.2.1",
+    "eslint-config-prettier": "^9.1.0",
     "next": "14.0.0",
     "next-i18next": "^11.3.0",
+    "prettier": "^3.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.54.0",

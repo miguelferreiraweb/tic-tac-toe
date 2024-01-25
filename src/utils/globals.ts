@@ -7,5 +7,5 @@ export const PENDING: string = 'PENDING';
 export const INITIAL_RESTART_COUNTER: number = 5;
 
 export const LOCALES = {
-    COMMON: 'common'
+  COMMON: 'common',
 };

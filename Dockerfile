@@ -27,4 +27,4 @@ RUN pnpm run build
 EXPOSE 3000
 
 # Start the Next.js production server
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
