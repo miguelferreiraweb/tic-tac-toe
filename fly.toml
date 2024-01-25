@@ -3,7 +3,6 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "tic-tac-toe-dev"
 primary_region = "mad"
 
 [build]
