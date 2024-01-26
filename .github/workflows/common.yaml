@@ -1,0 +1,43 @@
+name: Common Build and Deploy
+
+on:
+  push:
+    branches:
+      - ${{ matrix.branch }}
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.9.0'
+
+    - name: Install pnpm & install dependencies
+      run: npm install -g pnpm && pnpm i --frozen-lockfile
+
+    - name: Linting
+      if: matrix.lint
+      run: pnpm run lint && pnpm run format:fix
+
+    - name: Build application
+      run: pnpm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+    - run: flyctl deploy --app ${{ matrix.appName }} --remote-only --ha=false
