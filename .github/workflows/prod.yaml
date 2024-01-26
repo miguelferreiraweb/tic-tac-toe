@@ -1,4 +1,4 @@
-name: Build and Deploy to PROD
+name: PROD
 
 on:
   push:
@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Common Build
-        uses: ./.github/actions/common.yaml
+        uses: common.yaml

@@ -1,4 +1,4 @@
-name: Build and Deploy to DEV
+name: DEV
 
 on:
   push:
@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Common Build and Deploy
-        uses: ./.github/actions/common.yaml
+        uses: common.yaml
