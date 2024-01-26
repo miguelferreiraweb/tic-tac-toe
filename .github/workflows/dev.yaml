@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Common Build and Deploy
-        uses: common.yaml
+        uses: ./.github/workflows/common.yaml
