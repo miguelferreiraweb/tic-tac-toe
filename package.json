@@ -14,7 +14,7 @@
     "lint": "next lint",
     "format": "prettier --check '**/*.{scss,css,ts,tsx}'",
     "format:fix": "prettier --write '**/*.{scss,css,ts,tsx}'",
-    "test": "vitest",
+    "test": "vitest run --coverage",
     "test:us": "vitest -u",
     "test:ui": "vitest --ui"
   },
@@ -38,6 +38,7 @@
     "@types/react-dom": "^18.2.18",
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.2.2",
     "@vitest/ui": "^1.2.2",
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",

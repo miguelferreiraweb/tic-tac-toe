@@ -4,5 +4,9 @@
 #build
 .next
 
+# testing
+/coverage
+
 #misc
 .vscode
+.DS_Store

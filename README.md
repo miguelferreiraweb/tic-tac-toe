@@ -18,13 +18,20 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 - Install Docker in your machine.
 - **Docker build command**:
+
 ```
 docker build -t tic-tac-toe .
 ```
+
 - **Docker run command**:
+
 ```
 docker run -p 3000:3000 tic-tac-toe
 ```
+
+## SonarQube
+
+[https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe](https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe)
 
 ## Preview
 
