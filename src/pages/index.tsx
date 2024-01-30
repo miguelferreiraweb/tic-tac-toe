@@ -1,65 +1,76 @@
 import clsx from 'clsx';
-import HeadComponent from 'components/HeadComponent/HeadComponent';
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import HeadComponent from '@/components/HeadComponent/HeadComponent';
 import styles from '@/styles/Home.module.scss';
-import { calculateRoundResult } from '@/utils/calculateRoundResult';
 import {
   BOARD_CELLS,
-  DRAW,
   INITIAL_RESTART_COUNTER,
+  INTERVAL_TIMER_MS,
   LOCALES,
-  PENDING,
-  PLAYER_O,
-  PLAYER_X,
-  WIN,
-} from '@/utils/globals';
+} from '@/utils/constants/board';
+import {
+  BoardSymbolEnum,
+  BoardSymbolType,
+  RoundStatusEnum,
+  RoundStatusType,
+} from '@/utils/entities/board';
+import { calculateRoundResult } from '@/utils/functions/calculateRoundResult';
 
-const Home: NextPage = () => {
-  const BOARD_INITIAL_STATE: Array<string> = ['', '', '', '', '', '', '', '', ''];
-  const [board, setBoard] = useState(BOARD_INITIAL_STATE);
-  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
-  const [isRoundFinished, setIsRoundFinished] = useState(false);
-  const [roundStatus, setRoundStatus] = useState(PENDING);
-  const [restartCounter, setRestartCounter] = useState(INITIAL_RESTART_COUNTER);
+export const getStaticProps: GetStaticProps = async ({ locale = '' }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, [LOCALES.COMMON])),
+  },
+});
+
+const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
+
+const Home: NextPage = (): JSX.Element => {
+  const [board, setBoard] = useState<BoardSymbolType[]>(BOARD_INITIAL_STATE);
+  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(BoardSymbolEnum.PlayerX);
+  const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
+  const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
+  const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
   const { t } = useTranslation();
 
   useEffect(() => {
-    let intervalId: any;
+    let intervalId: NodeJS.Timer;
 
     if (isRoundFinished) {
+      // runs the interval every second and decrements the restart counter.
+      // when counter reaches 0, it will reset/restart the game.
       intervalId = setInterval(() => {
-        setRestartCounter((restartCounter) => restartCounter - 1);
+        setRestartCounter(restartCounter - 1);
 
         if (restartCounter <= 0) {
           resetGame();
           setRestartCounter(INITIAL_RESTART_COUNTER);
-          return () => clearInterval(intervalId);
         }
-      }, 1000);
+      }, INTERVAL_TIMER_MS);
     }
+
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRoundFinished, restartCounter]);
 
   const updateBoard = (index: number): void => {
-    let updatedBoard: Array<string> = [...board];
+    let updatedBoard: BoardSymbolType[] = [...board];
     updatedBoard[index] = currentPlayer;
     setBoard(updatedBoard);
-    const result: string = calculateRoundResult(updatedBoard);
+    const result: RoundStatusType = calculateRoundResult(updatedBoard);
 
     switch (result) {
-      case WIN:
+      case RoundStatusEnum.Win:
         setIsRoundFinished(true);
         break;
-      case DRAW:
+      case RoundStatusEnum.Draw:
         setIsRoundFinished(true);
         break;
-      case PENDING:
+      case RoundStatusEnum.Pending:
         updateNextPlayerTurn();
         break;
       default:
@@ -71,15 +82,18 @@ const Home: NextPage = () => {
   };
 
   const updateNextPlayerTurn = (): void =>
-    currentPlayer === PLAYER_X ? setCurrentPlayer(PLAYER_O) : setCurrentPlayer(PLAYER_X);
+    currentPlayer === BoardSymbolEnum.PlayerX
+      ? setCurrentPlayer(BoardSymbolEnum.PlayerO)
+      : setCurrentPlayer(BoardSymbolEnum.PlayerX);
 
   const isCellEmpty = (index: number): boolean => !board[index];
 
-  const isBoardEmpty = (): boolean => !board.includes(PLAYER_X) && !board.includes(PLAYER_O);
+  const isBoardEmpty = (): boolean =>
+    !board.includes(BoardSymbolEnum.PlayerX) && !board.includes(BoardSymbolEnum.PlayerO);
 
-  const resetGame = () => {
+  const resetGame = (): void => {
     setBoard(BOARD_INITIAL_STATE);
-    setCurrentPlayer(PLAYER_X);
+    setCurrentPlayer(BoardSymbolEnum.PlayerX);
     setIsRoundFinished(false);
   };
 
@@ -99,9 +113,9 @@ const Home: NextPage = () => {
 
   // Renders
 
-  const renderBoard = () => (
+  const renderBoard = (): JSX.Element => (
     <div className={styles.boardContainer}>
-      {[...Array(BOARD_CELLS)].map((item: any, index: number) => (
+      {[...Array(BOARD_CELLS)].map((_item, index: number) => (
         <button
           key={uuidv4()}
           className={styles[`cell-${index}`]}
@@ -113,19 +127,18 @@ const Home: NextPage = () => {
     </div>
   );
 
-  const renderCellItem = (item: string) =>
-    item === PLAYER_X ? (
-      <span className={styles.playerX}>{item}</span>
-    ) : (
-      <span className={styles.playerO}>{item}</span>
-    );
+  const renderCellItem = (item: string): JSX.Element => (
+    <span className={item === BoardSymbolEnum.PlayerX ? styles.playerX : styles.playerO}>
+      {item}
+    </span>
+  );
 
-  const renderRoundStatusMsg = () =>
-    roundStatus === DRAW ? (
+  const renderRoundStatusMsg = (): JSX.Element =>
+    roundStatus === RoundStatusEnum.Draw ? (
       <span>{t('its-a-draw')}</span>
     ) : (
       <span className={styles.winnerText}>
-        {t('player')}&nbsp;{currentPlayer} {t('won')}!{' '}
+        {t('player')}&nbsp;{currentPlayer} {t('won')}!
       </span>
     );
 
@@ -172,11 +185,5 @@ const Home: NextPage = () => {
     </div>
   );
 };
-
-export const getStaticProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, [LOCALES.COMMON])),
-  },
-});
 
 export default Home;

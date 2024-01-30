@@ -2,13 +2,21 @@
   "name": "tic-tac-toe",
   "version": "0.1.0",
   "private": true,
+  "author": "Miguel Ferreira",
+  "engines": {
+    "npm": ">=10.2.3",
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check '**/*.{scss,css,ts,tsx}'",
-    "format:fix": "prettier --write '**/*.{scss,css,ts,tsx}'"
+    "format:fix": "prettier --write '**/*.{scss,css,ts,tsx}'",
+    "test": "vitest",
+    "test:us": "vitest -u",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "clsx": "^1.2.1",
@@ -22,14 +30,22 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.3.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "18.6.2",
-    "@types/react": "18.0.15",
-    "@types/react-dom": "18.0.6",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "@types/uuid": "^8.3.4",
-    "eslint": "8.20.0",
-    "eslint-config-next": "12.2.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^1.2.2",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.1.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "typescript": "4.7.4"
+    "jsdom": "^24.0.0",
+    "typescript": "5.1.6",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.2"
   }
 }

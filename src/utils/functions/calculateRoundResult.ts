@@ -1,6 +1,6 @@
-import { DRAW, PENDING, WIN } from '@/utils/globals';
+import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
 
-const winningConditions = [
+const winningConditions: number[][] = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -11,7 +11,7 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
-export const calculateRoundResult = (board: string[]): string => {
+export const calculateRoundResult = (board: BoardSymbolType[]): RoundStatusType => {
   let roundWon = false;
   for (let i = 0; i <= 7; i++) {
     const winCondition: number[] = winningConditions[i];
@@ -28,12 +28,12 @@ export const calculateRoundResult = (board: string[]): string => {
   }
 
   if (roundWon) {
-    return WIN;
+    return RoundStatusEnum.Win;
   }
 
   if (!board.includes('')) {
-    return DRAW;
+    return RoundStatusEnum.Draw;
   }
 
-  return PENDING;
+  return RoundStatusEnum.Pending;
 };
