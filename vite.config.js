@@ -10,6 +10,9 @@ export default defineConfig({
     environment: 'jsdom', // enables HTML in Vitest.
     globals: true,
     setupFiles: './src/__tests__/setup.ts',
+    coverage: {
+      reporter: ['text', 'lcov'],
+    },
   },
   resolve: {
     alias: {

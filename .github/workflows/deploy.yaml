@@ -31,7 +31,7 @@ jobs:
 
     - name: Test
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      run: pnpm run test
+      run: pnpm run test:coverage
 
     - name: Build application
       run: pnpm run build
