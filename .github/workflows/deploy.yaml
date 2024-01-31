@@ -1,6 +1,8 @@
 name: Build and Deploy
 
 on:
+  pull_request:
+    types: [reopened, opened, synchronize, edited]
   push:
     branches:
       - development

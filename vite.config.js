@@ -12,6 +12,15 @@ export default defineConfig({
     setupFiles: './src/__tests__/setup.ts',
     coverage: {
       reporter: ['text', 'lcov'],
+      exclude: [
+        'next-i18next.config.js',
+        'next.config.js',
+        'src/pages/api/hello.ts',
+        'src/utils/entities/**',
+        'src/utils/constants/**',
+        '.next/**',
+        'next-env.d.ts',
+      ],
     },
   },
   resolve: {
