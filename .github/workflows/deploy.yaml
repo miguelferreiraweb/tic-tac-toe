@@ -62,6 +62,15 @@ jobs:
         with:
           fetch-depth: 0 # all commits and history will be fetched during the checkout process.
 
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install pnpm & install dependencies
+        run: npm install -g pnpm && pnpm i --frozen-lockfile
+
       - name: Download coverage artifact
         uses: actions/download-artifact@v2
         with:
