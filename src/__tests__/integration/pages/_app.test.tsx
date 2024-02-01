@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import MyApp from '@/pages/_app';
 
-describe('Home', () => {
+describe('App', () => {
   const MockPage = () => <div>mock page</div>;
   it('should render app unchanged', () => {
     const { container } = render(

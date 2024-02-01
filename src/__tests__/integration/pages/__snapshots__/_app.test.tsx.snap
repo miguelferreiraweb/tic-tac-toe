@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Home > should render app unchanged 1`] = `
+exports[`App > should render app unchanged 1`] = `
 <div>
   <div>
     mock page

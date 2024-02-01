@@ -155,7 +155,7 @@ const Home: NextPage = (): JSX.Element => {
             </>
           )}
         </div>
-        <div>{renderBoard()}</div>
+        {renderBoard()}
         <div className={styles.restart}>
           <button
             onClick={handleRestartGameClick}

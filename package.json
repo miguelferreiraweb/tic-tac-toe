@@ -17,7 +17,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:update-snapshots": "vitest -u",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "outdated": "pnpm run outdated"
   },
   "dependencies": {
     "clsx": "^1.2.1",
