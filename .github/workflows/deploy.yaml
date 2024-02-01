@@ -63,7 +63,7 @@ jobs:
           fetch-depth: 0 # all commits and history will be fetched during the checkout process.
 
       - name: Echo machine files and directories
-        run: ls -la
+        run: ls -la ~
 
       - name: Cache pnpm dependencies
         uses: actions/cache@v3
