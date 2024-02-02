@@ -1,8 +1,13 @@
 #dependencies
 /node_modules
+package-lock.json
 
 #build
 .next
 
+# testing
+/coverage
+
 #misc
 .vscode
+.DS_Store

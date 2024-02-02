@@ -6,12 +6,12 @@ const HeadComponent: NextPage = () => {
   const { t } = useTranslation();
 
   return (
-      <Head>
-        <title>{t('head.title')}</title>
-        <meta name="description" content={t('head.content')} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-  )
-}
+    <Head>
+      <title>{t('head.title')}</title>
+      <meta name='description' content={t('head.content')} />
+      <link rel='icon' href='/favicon.ico' />
+    </Head>
+  );
+};
 
 export default HeadComponent;
