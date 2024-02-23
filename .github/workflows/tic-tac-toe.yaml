@@ -48,7 +48,7 @@ jobs:
 
     - name: Lint and Test Composite Action
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      uses: ./.github/actions/lint_and_test.yml
+      uses: ./.github/actions/lint_and_test/action.yml
 
     - name: Build application
       run: pnpm run build
@@ -60,7 +60,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/development'
     steps:
       - name: SonarCloud Composite Action
-        uses: ./.github/actions/sonarcloud.yml
+        uses: ./.github/actions/sonarcloud/action.yml
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,4 +69,4 @@ jobs:
       - sonarcloud
     steps:
       - name: Deployment Composite Action (DEV or PROD)
-        uses: ./.github/actions/deploy.yml
+        uses: ./.github/actions/deploy/action.yml
