@@ -1,0 +1,15 @@
+name: Lint and Test Composite Action
+runs:
+  using: 'composite'
+  steps:
+    - name: Linting
+      run: pnpm run lint && pnpm run format:fix
+
+    - name: Test
+      run: pnpm run test:coverage
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage

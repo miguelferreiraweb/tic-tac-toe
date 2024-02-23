@@ -1,0 +1,24 @@
+name: Deployment Composite Action
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up flyctl
+      uses: superfly/flyctl-actions/setup-flyctl@master
+
+    - name: Deploy to DEV
+      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
+
+    - name: Deploy to PROD on Fly.io
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: flyctl deploy --app tic-tac-toe-prod --remote-only --ha=false
+
+    - name: Deploy to PROD on Vercel
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: |
+        pnpm i --global vercel@latest
+        vercel build --prod --token=${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}
+        vercel --prod --token ${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}

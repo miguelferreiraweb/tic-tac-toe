@@ -1,0 +1,21 @@
+name: SonarCloud Composite Action
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # all commits and history will be fetched during the checkout process.
+
+    - name: Download coverage artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
