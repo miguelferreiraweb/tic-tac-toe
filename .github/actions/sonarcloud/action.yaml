@@ -1,5 +1,5 @@
 name: SonarCloud Composite Action
-
+description: Sonarcloud scan
 runs:
   using: 'composite'
   steps:

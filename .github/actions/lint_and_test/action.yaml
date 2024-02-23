@@ -1,4 +1,5 @@
 name: Lint and Test Composite Action
+description: Runs Lint, Test and uploads coverage artifact to be used in separate sonarcloud job
 runs:
   using: 'composite'
   steps:

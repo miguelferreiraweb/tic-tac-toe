@@ -1,4 +1,5 @@
 name: Deployment Composite Action
+description: Deploys app to DEV or PROD depending on the branch
 runs:
   using: 'composite'
   steps:
