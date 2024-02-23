@@ -5,9 +5,11 @@ runs:
   steps:
     - name: Linting
       run: pnpm run lint && pnpm run format:fix
+      shell: bash
 
     - name: Test
       run: pnpm run test:coverage
+      shell: bash
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
