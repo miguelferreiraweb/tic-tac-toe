@@ -1,5 +1,9 @@
 name: Deployment Composite Action
 description: Deploys app to DEV or PROD depending on the branch
+inputs:
+  vercel_token:
+    description: 'A Github PAT'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -20,6 +24,6 @@ runs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         pnpm i --global vercel@latest
-        vercel build --prod --token=${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}
-        vercel --prod --token ${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}
+        vercel build --prod --token=${{ inputs.vercel_token }}
+        vercel --prod --token ${{ inputs.vercel_token }}
       shell: bash
