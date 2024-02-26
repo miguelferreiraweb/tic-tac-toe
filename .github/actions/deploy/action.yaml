@@ -11,7 +11,7 @@ runs:
       uses: superfly/flyctl-actions/setup-flyctl@master
 
     - name: Deploy to DEV
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
       shell: bash
 
@@ -32,5 +32,6 @@ runs:
       run: |
         pnpm i --global vercel@latest
         vercel build --prod --token=${{ inputs.vercel_token }}
+        vercel pull --yes --token ${{ inputs.vercel_token }}
         vercel --prod --token ${{ inputs.vercel_token }}
       shell: bash
