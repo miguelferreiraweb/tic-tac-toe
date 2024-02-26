@@ -11,7 +11,7 @@ runs:
       uses: superfly/flyctl-actions/setup-flyctl@master
 
     - name: Deploy to DEV
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
       run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
       shell: bash
 
@@ -21,14 +21,14 @@ runs:
       shell: bash
 
     - name: Setup pnpm
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: pnpm/action-setup@v2
       with:
         version: 8.14.2
         run_install: false
 
-    - name: Deploy to DEV on Vercel
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+    - name: Deploy to PROD on Vercel
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         pnpm i --global vercel@latest
         vercel pull --yes --environment=production --token=${{ inputs.vercel_token }}
