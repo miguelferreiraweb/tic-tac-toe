@@ -20,6 +20,13 @@ runs:
       run: flyctl deploy --app tic-tac-toe-prod --remote-only --ha=false
       shell: bash
 
+    - name: Setup pnpm
+      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8.14.2
+        run_install: false
+
     - name: Deploy to DEV on Vercel
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
       run: |
