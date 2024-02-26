@@ -65,6 +65,9 @@ jobs:
           fetch-depth: 0 # all commits and history will be fetched during the checkout process.
       - name: SonarCloud Composite Action
         uses: ./.github/actions/sonarcloud
+        with:
+          github_token: ${{ inputs.github_token }}
+          sonar_token: ${{ inputs.sonar_token }}
 
   deploy:
     runs-on: ubuntu-latest
