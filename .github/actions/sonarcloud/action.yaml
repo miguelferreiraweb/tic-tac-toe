@@ -1,12 +1,5 @@
 name: SonarCloud Composite Action
 description: Sonarcloud scan
-inputs:
-  github_token:
-    description: 'GitHub Token'
-    required: true
-  sonar_token:
-    description: 'Sonar Token'
-    required: true
 
 runs:
   using: 'composite'
@@ -19,6 +12,3 @@ runs:
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
-      with:
-        github_token: ${{ inputs.github_token }}
-        sonar_token: ${{ inputs.sonar_token }}
