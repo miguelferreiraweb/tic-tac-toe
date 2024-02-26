@@ -75,5 +75,7 @@ jobs:
       - build
       - sonarcloud
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Deployment Composite Action (DEV or PROD)
         uses: ./.github/actions/deploy

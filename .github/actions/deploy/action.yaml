@@ -3,9 +3,6 @@ description: Deploys app to DEV or PROD depending on the branch
 runs:
   using: 'composite'
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
     - name: Set up flyctl
       uses: superfly/flyctl-actions/setup-flyctl@master
 
