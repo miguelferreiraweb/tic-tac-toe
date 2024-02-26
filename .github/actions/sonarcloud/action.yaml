@@ -7,6 +7,7 @@ inputs:
   sonar_token:
     description: 'Sonar Token'
     required: true
+
 runs:
   using: 'composite'
   steps:
@@ -18,6 +19,6 @@ runs:
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        github_token: ${{ inputs.github_token }}
+        sonar_token: ${{ inputs.sonar_token }}
