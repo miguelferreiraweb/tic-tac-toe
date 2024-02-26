@@ -59,6 +59,10 @@ jobs:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/development'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # all commits and history will be fetched during the checkout process.
       - name: SonarCloud Composite Action
         uses: ./.github/actions/sonarcloud
 
