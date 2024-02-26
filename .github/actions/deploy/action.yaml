@@ -31,5 +31,7 @@ runs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
       run: |
         pnpm i --global vercel@latest
-        vercel --prod --token ${{ inputs.vercel_token }}
+        vercel pull --yes --environment=production --token=${{ inputs.vercel_token }}
+        vercel build --prod --token=${{ inputs.vercel_token }}
+        vercel deploy --prebuilt --prod --token=${{ inputs.vercel_token }}
       shell: bash
