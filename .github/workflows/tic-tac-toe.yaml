@@ -10,11 +10,11 @@ on:
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  TIC_TAC_TOE_VERCEL_TOKEN: ${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -46,19 +46,9 @@ jobs:
     - name: Install dependencies
       run: pnpm i --frozen-lockfile
 
-    - name: Linting
+    - name: Lint and Test Composite Action
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      run: pnpm run lint && pnpm run format:fix
-
-    - name: Test
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      run: pnpm run test:coverage
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: coverage
+      uses: ./.github/actions/lint_and_test
 
     - name: Build application
       run: pnpm run build
@@ -68,42 +58,26 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # all commits and history will be fetched during the checkout process.
-
-      - name: Download coverage artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: coverage-report
-          path: coverage
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any (automatically created on behalf of github)
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Composite Action
+        uses: ./.github/actions/sonarcloud
 
   deploy:
     runs-on: ubuntu-latest
     needs:
       - build
       - sonarcloud
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up flyctl
-      uses: superfly/flyctl-actions/setup-flyctl@master
-
-    - name: Deploy to DEV
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
-
-    - name: Deploy to PROD
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      run: flyctl deploy --app tic-tac-toe-prod --remote-only --ha=false
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Deploy Composite Action (DEV or PROD)
+        uses: ./.github/actions/deploy
+        with:
+          vercel_token: ${{ env.TIC_TAC_TOE_VERCEL_TOKEN }}

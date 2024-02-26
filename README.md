@@ -37,7 +37,16 @@ docker run -p 3000:3000 tic-tac-toe
 
 DEV: [https://tic-tac-toe-dev.fly.dev](https://tic-tac-toe-dev.fly.dev)
 
-PROD: [https://tic-tac-toe-prod.fly.dev](https://tic-tac-toe-prod.fly.dev)
+PROD:
+
+[https://tic-tac-toe-prod.fly.dev](https://tic-tac-toe-prod.fly.dev)
+
+[https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/](https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/)
+
+## Kanban Board
+
+[https://miguelferreiraweb.atlassian.net/jira/software/projects/TIC/boards/1](https://miguelferreiraweb.atlassian.net/jira/software/projects/TIC/boards/1)
+
 
 ## Screenshots Preview
 
