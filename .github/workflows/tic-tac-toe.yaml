@@ -74,6 +74,10 @@ jobs:
     needs:
       - build
       - sonarcloud
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      (needs.sonarcloud.result == 'success' || needs.sonarcloud.result == 'skipped')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
