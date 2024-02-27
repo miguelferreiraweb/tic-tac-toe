@@ -37,8 +37,6 @@ const Home: NextPage = (): JSX.Element => {
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
   const { t } = useTranslation();
 
-  console.log('test push avoidance to master branch');
-
   useEffect(() => {
     let intervalId: NodeJS.Timer;
 
