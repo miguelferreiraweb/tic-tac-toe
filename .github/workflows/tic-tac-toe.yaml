@@ -27,7 +27,7 @@ jobs:
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
       with:
-        version: 8.14.2
+        version: 9.11.0
         run_install: false
 
     - name: Get pnpm store directory
