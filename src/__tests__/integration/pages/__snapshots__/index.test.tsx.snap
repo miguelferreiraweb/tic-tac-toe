@@ -20,63 +20,63 @@ exports[`Home > should render homepage unchanged 1`] = `
         class="_boardContainer_b18682"
       >
         <button
-          class="_cell-0_b18682"
+          class="_cell_b18682 _cell--0_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-1_b18682"
+          class="_cell_b18682 _cell--1_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-2_b18682"
+          class="_cell_b18682 _cell--2_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-3_b18682"
+          class="_cell_b18682 _cell--3_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-4_b18682"
+          class="_cell_b18682 _cell--4_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-5_b18682"
+          class="_cell_b18682 _cell--5_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-6_b18682"
+          class="_cell_b18682 _cell--6_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-7_b18682"
+          class="_cell_b18682 _cell--7_b18682"
         >
           <span
             class="_playerO_b18682"
           />
         </button>
         <button
-          class="_cell-8_b18682"
+          class="_cell_b18682 _cell--8_b18682"
         >
           <span
             class="_playerO_b18682"
@@ -87,28 +87,11 @@ exports[`Home > should render homepage unchanged 1`] = `
         class="_restart_b18682"
       >
         <button
-          class="_restartBtnDisabled_b18682"
+          class="_restartBtn_b18682 _restartBtn--disabled_b18682"
           disabled=""
         >
           restart
         </button>
-      </div>
-      <div
-        class="_results_b18682"
-      >
-        latest-results
-        <p>
-          player-x-wins
-           - 0
-        </p>
-        <p>
-          player-o-wins
-           - 0
-        </p>
-        <p>
-          draws
-           - 0
-        </p>
       </div>
     </main>
   </div>

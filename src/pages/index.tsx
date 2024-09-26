@@ -19,19 +19,27 @@ import {
   RoundStatusEnum,
   RoundStatusType,
 } from '@/utils/entities/board';
-import { calculateRoundResult } from '@/utils/functions/calculateRoundResult';
+import {
+  calculateRoundResult,
+  getRandomStartingPlayer,
+} from '@/utils/functions/calculateRoundResult';
+
+interface HomeProps {
+  startingPlayer: BoardSymbolEnum;
+}
 
 export const getStaticProps: GetStaticProps = async ({ locale = '' }) => ({
   props: {
     ...(await serverSideTranslations(locale, [LOCALES.COMMON])),
+    startingPlayer: getRandomStartingPlayer(),
   },
 });
 
 const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
 
-const Home: NextPage = (): JSX.Element => {
+const Home: NextPage<HomeProps> = ({ startingPlayer }): JSX.Element => {
   const [board, setBoard] = useState<BoardSymbolType[]>(BOARD_INITIAL_STATE);
-  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(BoardSymbolEnum.PlayerX);
+  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(startingPlayer);
   const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
   const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
@@ -63,20 +71,9 @@ const Home: NextPage = (): JSX.Element => {
     setBoard(updatedBoard);
     const result: RoundStatusType = calculateRoundResult(updatedBoard);
 
-    switch (result) {
-      case RoundStatusEnum.Win:
-        setIsRoundFinished(true);
-        break;
-      case RoundStatusEnum.Draw:
-        setIsRoundFinished(true);
-        break;
-      case RoundStatusEnum.Pending:
-        updateNextPlayerTurn();
-        break;
-      default:
-        updateNextPlayerTurn();
-        break;
-    }
+    result === RoundStatusEnum.Finished || result === RoundStatusEnum.Draw
+      ? setIsRoundFinished(true)
+      : updateNextPlayerTurn();
 
     setRoundStatus(result);
   };
@@ -93,7 +90,9 @@ const Home: NextPage = (): JSX.Element => {
 
   const resetGame = (): void => {
     setBoard(BOARD_INITIAL_STATE);
-    setCurrentPlayer(BoardSymbolEnum.PlayerX);
+    setCurrentPlayer(
+      currentPlayer === BoardSymbolEnum.PlayerX ? BoardSymbolEnum.PlayerO : BoardSymbolEnum.PlayerX
+    );
     setIsRoundFinished(false);
   };
 
@@ -118,7 +117,7 @@ const Home: NextPage = (): JSX.Element => {
       {[...Array(BOARD_CELLS)].map((_item, index: number) => (
         <button
           key={uuidv4()}
-          className={styles[`cell-${index}`]}
+          className={`${styles.cell} ${styles[`cell--${index}`]}`}
           onClick={() => handleCellClick(index)}
         >
           {renderCellItem(board[index])}
@@ -143,7 +142,7 @@ const Home: NextPage = (): JSX.Element => {
     );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.homeContainer}>
       <HeadComponent />
       <main className={styles.main}>
         <div className={styles.start}>
@@ -159,10 +158,9 @@ const Home: NextPage = (): JSX.Element => {
         <div className={styles.restart}>
           <button
             onClick={handleRestartGameClick}
-            className={clsx({
-              [styles.restartBtn]: !isBoardEmpty(),
-              [styles.restartBtnDisabled]: isBoardEmpty(),
-              [styles.autoRestartBtn]: isRoundFinished,
+            className={clsx(styles.restartBtn, {
+              [styles['restartBtn--disabled']]: isBoardEmpty(),
+              [styles['restartBtn--reset']]: isRoundFinished,
             })}
             disabled={isBoardEmpty()}
           >
@@ -174,12 +172,6 @@ const Home: NextPage = (): JSX.Element => {
               t('restart')
             )}
           </button>
-        </div>
-        <div className={styles.results}>
-          {t('latest-results')}
-          <p>{t('player-x-wins')} - 0</p>
-          <p>{t('player-o-wins')} - 0</p>
-          <p>{t('draws')} - 0</p>
         </div>
       </main>
     </div>

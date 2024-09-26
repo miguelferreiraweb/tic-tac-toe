@@ -31,7 +31,7 @@ describe('calculateRoundResult', () => {
       BoardSymbolEnum.PlayerO,
       BoardSymbolEnum.PlayerO,
     ];
-    expect(calculateRoundResult(pendingResult)).toBe(RoundStatusEnum.Win);
+    expect(calculateRoundResult(pendingResult)).toBe(RoundStatusEnum.Finished);
   });
 
   it('should return "DRAW" as the current round status', () => {

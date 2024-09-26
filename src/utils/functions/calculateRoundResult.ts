@@ -1,4 +1,4 @@
-import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
+import { BoardSymbolEnum, BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
 
 const winningConditions: number[][] = [
   [0, 1, 2],
@@ -11,29 +11,47 @@ const winningConditions: number[][] = [
   [2, 4, 6],
 ];
 
+/**
+ * Iterates over all possible winning conditions. If the board symbols in those
+ * positions are all the same ex: X = X = X or O = O = O, means that we have a winner.
+ * @param board
+ * @returns RoundStatusType
+ */
 export const calculateRoundResult = (board: BoardSymbolType[]): RoundStatusType => {
-  let roundWon = false;
-  for (let i = 0; i <= 7; i++) {
+  let isRoundWon = false;
+
+  for (let i = 0; i <= winningConditions.length - 1; i++) {
     const winCondition: number[] = winningConditions[i];
-    let a = board[winCondition[0]];
-    let b = board[winCondition[1]];
-    let c = board[winCondition[2]];
-    if (a === '' || b === '' || c === '') {
+    // Get the current board symbols in these possible winning positions.
+    // These board symbols might be filled or empty.
+    let [boardSymbolA, boardSymbolB, boardSymbolC] = [
+      board[winCondition[0]],
+      board[winCondition[1]],
+      board[winCondition[2]],
+    ];
+
+    // When symbols don't match for the current winCondition, we skip to the next iteration.
+    if (boardSymbolA === '' || boardSymbolB === '' || boardSymbolC === '') {
       continue;
     }
-    if (a === b && b === c) {
-      roundWon = true;
+
+    // All equal symbols means that we have a winner ex: X = X = X.
+    if (boardSymbolA === boardSymbolB && boardSymbolB === boardSymbolC) {
+      isRoundWon = true;
       break;
     }
   }
 
-  if (roundWon) {
-    return RoundStatusEnum.Win;
-  }
-
-  if (!board.includes('')) {
+  if (isRoundWon) {
+    return RoundStatusEnum.Finished;
+  } else if (!board.includes('')) {
     return RoundStatusEnum.Draw;
   }
 
   return RoundStatusEnum.Pending;
+};
+
+export const getRandomStartingPlayer = () => {
+  const players: BoardSymbolEnum[] = Object.values(BoardSymbolEnum);
+  return players[Math.floor(Math.random() * players.length) | 0];
 };

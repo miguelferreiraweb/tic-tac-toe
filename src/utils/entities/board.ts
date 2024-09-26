@@ -2,7 +2,7 @@ export type BoardSymbolType = BoardSymbolEnum | '';
 export type RoundStatusType = RoundStatusEnum;
 
 export enum RoundStatusEnum {
-  Win = 'WIN',
+  Finished = 'Finished',
   Draw = 'DRAW',
   Pending = 'PENDING',
 }
