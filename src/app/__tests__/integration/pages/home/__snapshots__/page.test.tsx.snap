@@ -11,8 +11,8 @@ exports[`Home > should render homepage unchanged 1`] = `
       <div
         class="_start_3e3399"
       >
-        'its-turn-of' 
-        X
+        its-turn-of 
+        O
         !
       </div>
       <div
