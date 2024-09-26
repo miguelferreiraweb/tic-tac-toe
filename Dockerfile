@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:18-alpine
+FROM node:20.9.0-alpine
 
 # Set the default value to 'production', but it's possible to override during docker build.
 ARG NODE_ENV=production
@@ -12,13 +12,16 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 # Install pnpm globally
-RUN npm i -g pnpm
+RUN npm i -g pnpm@9.11.0
 
 # Install dependencies
 RUN pnpm i --frozen-lockfile --prefer-offline
 
 # Copy the current directory contents into the container at /app
 COPY . .
+
+# Disable Next.js telemetry https://nextjs.org/telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the Next.js application
 RUN pnpm run build

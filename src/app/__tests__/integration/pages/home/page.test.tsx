@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
+import Home from 'page';
 import { describe, expect, it } from 'vitest';
-
-import Home from '@/app/page';
 
 describe('Home', () => {
   it('should render homepage unchanged', () => {

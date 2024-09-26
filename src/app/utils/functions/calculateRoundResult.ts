@@ -1,4 +1,4 @@
-import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/app/utils/entities/board';
+import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
 
 const winningConditions: number[][] = [
   [0, 1, 2],

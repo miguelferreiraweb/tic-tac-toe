@@ -5,19 +5,15 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import styles from '@/app/styles/Home.module.scss';
-import {
-  BOARD_CELLS,
-  INITIAL_RESTART_COUNTER,
-  INTERVAL_TIMER_MS,
-} from '@/app/utils/constants/board';
+import styles from '@/styles/Home.module.scss';
+import { BOARD_CELLS, INITIAL_RESTART_COUNTER, INTERVAL_TIMER_MS } from '@/utils/constants/board';
 import {
   BoardSymbolEnum,
   BoardSymbolType,
   RoundStatusEnum,
   RoundStatusType,
-} from '@/app/utils/entities/board';
-import { calculateRoundResult } from '@/app/utils/functions/calculateRoundResult';
+} from '@/utils/entities/board';
+import { calculateRoundResult } from '@/utils/functions/calculateRoundResult';
 
 const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
 

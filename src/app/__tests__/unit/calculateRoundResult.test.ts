@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { BoardSymbolEnum, BoardSymbolType, RoundStatusEnum } from '@/app/utils/entities/board';
-import { calculateRoundResult } from '@/app/utils/functions/calculateRoundResult';
+import { BoardSymbolEnum, BoardSymbolType, RoundStatusEnum } from '@/utils/entities/board';
+import { calculateRoundResult } from '@/utils/functions/calculateRoundResult';
 
 describe('calculateRoundResult', () => {
   it('should return "PENDING" as the current round status', () => {
