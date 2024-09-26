@@ -3,7 +3,7 @@
 exports[`Home > should render homepage unchanged 1`] = `
 <div>
   <div
-    class="_container_b18682"
+    class="_homeContainer_b18682"
   >
     <main
       class="_main_b18682"
@@ -13,7 +13,6 @@ exports[`Home > should render homepage unchanged 1`] = `
       >
         its-turn-of
          
-        X
         !
       </div>
       <div
