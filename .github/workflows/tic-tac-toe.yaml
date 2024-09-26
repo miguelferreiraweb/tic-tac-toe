@@ -44,7 +44,9 @@ jobs:
           ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
-      run: pnpm i --frozen-lockfile
+      run: |
+          pnpm i
+          pnpm i --frozen-lockfile
 
     - name: Lint and Test Composite Action
       if: github.event_name == 'push' && github.ref == 'refs/heads/development'
