@@ -14,12 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
     "paths": {
-      "@/components/*": ["app/components/*"],
-      "@/utils/*": ["app/utils/*"],
-      "@/styles/*": ["app/styles/*"],
-      "@/pages/*": ["app/pages/*"],
+      "@/*": ["./src/*"],
     },
     "plugins": [
       {
