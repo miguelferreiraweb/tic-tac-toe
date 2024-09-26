@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home > should render homepage unchanged 1`] = `
+<div>
+  <div
+    class="_homeContainer_3e3399"
+  >
+    <main
+      class="_main_3e3399"
+    >
+      <div
+        class="_start_3e3399"
+      >
+        'its-turn-of' 
+        X
+        !
+      </div>
+      <div
+        class="_boardContainer_3e3399"
+      >
+        <button
+          class="_cell_3e3399 _cell--0_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--1_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--2_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--3_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--4_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--5_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--6_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--7_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+        <button
+          class="_cell_3e3399 _cell--8_3e3399"
+        >
+          <span
+            class="_playerO_3e3399"
+          />
+        </button>
+      </div>
+      <div
+        class="_restart_3e3399"
+      >
+        <button
+          class="_restartBtn_3e3399 _restartBtn--disabled_3e3399"
+          disabled=""
+        >
+          restart
+        </button>
+      </div>
+    </main>
+  </div>
+</div>
+`;

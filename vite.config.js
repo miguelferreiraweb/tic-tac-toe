@@ -9,15 +9,15 @@ export default defineConfig({
   test: {
     environment: 'jsdom', // enables HTML in Vitest.
     globals: true,
-    setupFiles: './src/__tests__/setup.ts',
+    setupFiles: './src/app/__tests__/setup.ts',
     coverage: {
       reporter: ['text', 'lcov'],
       exclude: [
         'next-i18next.config.js',
         'next.config.js',
-        'src/pages/api/hello.ts',
-        'src/utils/entities/**',
-        'src/utils/constants/**',
+        'src/app/pages/api/hello.ts',
+        'src/app/utils/entities/**',
+        'src/app/utils/constants/**',
         '.next/**',
         'next-env.d.ts',
       ],
@@ -25,10 +25,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@/components/*': path.resolve(__dirname, './src/components/*'),
-      '@/utils/*': path.resolve(__dirname, './src/utils/*'),
-      '@/styles/*': path.resolve(__dirname, './src/styles/*'),
-      '@/pages/*': path.resolve(__dirname, './src/pages/*'),
+      '@/components/*': path.resolve(__dirname, './src/app/components/*'),
+      '@/utils/*': path.resolve(__dirname, './src/app/utils/*'),
+      '@/styles/*': path.resolve(__dirname, './src/app/styles/*'),
+      '@/pages/*': path.resolve(__dirname, './src/app/pages/*'),
     },
   },
 });

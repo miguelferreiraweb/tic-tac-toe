@@ -1,4 +1,4 @@
-import { BoardSymbolEnum, BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
+import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from 'app/utils/entities/board';
 
 const winningConditions: number[][] = [
   [0, 1, 2],
@@ -49,9 +49,4 @@ export const calculateRoundResult = (board: BoardSymbolType[]): RoundStatusType 
   }
 
   return RoundStatusEnum.Pending;
-};
-
-export const getRandomStartingPlayer = () => {
-  const players: BoardSymbolEnum[] = Object.values(BoardSymbolEnum);
-  return players[Math.floor(Math.random() * players.length) | 0];
 };

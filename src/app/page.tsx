@@ -1,49 +1,28 @@
-import clsx from 'clsx';
-import type { GetStaticProps, NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+'use client';
 
-import HeadComponent from '@/components/HeadComponent/HeadComponent';
-import styles from '@/styles/Home.module.scss';
-import {
-  BOARD_CELLS,
-  INITIAL_RESTART_COUNTER,
-  INTERVAL_TIMER_MS,
-  LOCALES,
-} from '@/utils/constants/board';
+import { BOARD_CELLS, INITIAL_RESTART_COUNTER, INTERVAL_TIMER_MS } from 'app/utils/constants/board';
 import {
   BoardSymbolEnum,
   BoardSymbolType,
   RoundStatusEnum,
   RoundStatusType,
-} from '@/utils/entities/board';
-import {
-  calculateRoundResult,
-  getRandomStartingPlayer,
-} from '@/utils/functions/calculateRoundResult';
+} from 'app/utils/entities/board';
+import { calculateRoundResult } from 'app/utils/functions/calculateRoundResult';
+import clsx from 'clsx';
+import type { NextPage } from 'next';
+import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-interface HomeProps {
-  startingPlayer: BoardSymbolEnum;
-}
-
-export const getStaticProps: GetStaticProps = async ({ locale = '' }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, [LOCALES.COMMON])),
-    startingPlayer: getRandomStartingPlayer(),
-  },
-});
+import styles from '@/styles/Home.module.scss';
 
 const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
 
-const Home: NextPage<HomeProps> = ({ startingPlayer }): JSX.Element => {
+const Home: NextPage = (): JSX.Element => {
   const [board, setBoard] = useState<BoardSymbolType[]>(BOARD_INITIAL_STATE);
-  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(startingPlayer);
+  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(getRandomStartingPlayer());
   const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
   const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
-  const { t } = useTranslation();
 
   useEffect(() => {
     let intervalId: NodeJS.Timer;
@@ -64,6 +43,11 @@ const Home: NextPage<HomeProps> = ({ startingPlayer }): JSX.Element => {
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRoundFinished, restartCounter]);
+
+  function getRandomStartingPlayer() {
+    const players: BoardSymbolEnum[] = Object.values(BoardSymbolEnum);
+    return players[Math.floor(Math.random() * players.length) | 0];
+  }
 
   const updateBoard = (index: number): void => {
     let updatedBoard: BoardSymbolType[] = [...board];
@@ -134,25 +118,16 @@ const Home: NextPage<HomeProps> = ({ startingPlayer }): JSX.Element => {
 
   const renderRoundStatusMsg = (): JSX.Element =>
     roundStatus === RoundStatusEnum.Draw ? (
-      <span>{t('its-a-draw')}</span>
+      <span>its-a-draw</span>
     ) : (
-      <span className={styles.winnerText}>
-        {t('player')}&nbsp;{currentPlayer} {t('won')}!
-      </span>
+      <span className={styles.winnerText}>player&nbsp;{currentPlayer} won!</span>
     );
 
   return (
     <div className={styles.homeContainer}>
-      <HeadComponent />
       <main className={styles.main}>
         <div className={styles.start}>
-          {isRoundFinished ? (
-            renderRoundStatusMsg()
-          ) : (
-            <>
-              {t('its-turn-of')} {currentPlayer}!
-            </>
-          )}
+          {isRoundFinished ? renderRoundStatusMsg() : <>its-turn-of {currentPlayer}!</>}
         </div>
         {renderBoard()}
         <div className={styles.restart}>
@@ -164,13 +139,7 @@ const Home: NextPage<HomeProps> = ({ startingPlayer }): JSX.Element => {
             })}
             disabled={isBoardEmpty()}
           >
-            {isRoundFinished ? (
-              <>
-                {t('restarting')} {restartCounter}
-              </>
-            ) : (
-              t('restart')
-            )}
+            {isRoundFinished ? <>restarting {restartCounter}</> : 'restart'}
           </button>
         </div>
       </main>

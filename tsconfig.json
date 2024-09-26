@@ -16,12 +16,23 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/utils/*": ["utils/*"],
-      "@/styles/*": ["styles/*"],
-      "@/pages/*": ["pages/*"],
+      "@/components/*": ["app/components/*"],
+      "@/utils/*": ["app/utils/*"],
+      "@/styles/*": ["app/styles/*"],
+      "@/pages/*": ["app/pages/*"],
     },
+    "plugins": [
+      {
+        "name": "next",
+      },
+    ],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/__tests__/setup.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "src/app/__tests__/setup.ts",
+    ".next/types/**/*.ts",
+  ],
   "exclude": ["node_modules"],
 }
