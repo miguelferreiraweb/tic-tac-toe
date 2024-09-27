@@ -11,7 +11,8 @@ exports[`Home > should render homepage unchanged 1`] = `
       <div
         class="_start_3e3399"
       >
-        its-turn-of 
+        home.its-turn-of
+         
         X
         !
       </div>
@@ -89,7 +90,7 @@ exports[`Home > should render homepage unchanged 1`] = `
           class="_restartBtn_3e3399 _restartBtn--disabled_3e3399"
           disabled=""
         >
-          restart
+          home.restart
         </button>
       </div>
     </main>

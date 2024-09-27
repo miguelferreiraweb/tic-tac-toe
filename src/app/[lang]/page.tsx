@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,6 +27,7 @@ const Home: NextPage = (): JSX.Element => {
   const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
   const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
+  const t = useTranslations('home');
 
   useEffect(() => {
     let intervalId: NodeJS.Timer;
@@ -116,16 +118,24 @@ const Home: NextPage = (): JSX.Element => {
 
   const renderRoundStatusMsg = (): JSX.Element =>
     roundStatus === RoundStatusEnum.Draw ? (
-      <span>its-a-draw</span>
+      <span>{t('its-a-draw')}</span>
     ) : (
-      <span className={styles.winnerText}>player&nbsp;{currentPlayer} won!</span>
+      <span className={styles.winnerText}>
+        {t('player')}&nbsp;{currentPlayer} {t('won')}!
+      </span>
     );
 
   return (
     <div className={styles.homeContainer}>
       <main className={styles.main}>
         <div className={styles.start}>
-          {isRoundFinished ? renderRoundStatusMsg() : <>its-turn-of {currentPlayer}!</>}
+          {isRoundFinished ? (
+            renderRoundStatusMsg()
+          ) : (
+            <>
+              {t('its-turn-of')} {currentPlayer}!
+            </>
+          )}
         </div>
         {renderBoard()}
         <div className={styles.restart}>
@@ -137,7 +147,13 @@ const Home: NextPage = (): JSX.Element => {
             })}
             disabled={isBoardEmpty()}
           >
-            {isRoundFinished ? <>restarting {restartCounter}</> : 'restart'}
+            {isRoundFinished ? (
+              <>
+                {t('restarting')} {restartCounter}
+              </>
+            ) : (
+              t('restart')
+            )}
           </button>
         </div>
       </main>
