@@ -13,7 +13,10 @@ import {
   RoundStatusEnum,
   RoundStatusType,
 } from '@/utils/entities/board';
-import { calculateRoundResult } from '@/utils/functions/calculateRoundResult';
+import {
+  calculateRoundResult,
+  getRandomStartingPlayer,
+} from '@/utils/functions/calculateRoundResult';
 
 const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
 
@@ -43,11 +46,6 @@ const Home: NextPage = (): JSX.Element => {
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRoundFinished, restartCounter]);
-
-  function getRandomStartingPlayer() {
-    const players: BoardSymbolEnum[] = Object.values(BoardSymbolEnum);
-    return players[Math.floor(Math.random() * players.length) | 0];
-  }
 
   const updateBoard = (index: number): void => {
     let updatedBoard: BoardSymbolType[] = [...board];
