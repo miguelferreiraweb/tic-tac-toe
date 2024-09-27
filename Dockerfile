@@ -15,7 +15,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm i -g pnpm@9.11.0
 
 # Install dependencies
-RUN pnpm i --frozen-lockfile --prefer-offline
+RUN pnpm i  --production=false --frozen-lockfile --prefer-offline
 
 # Copy the current directory contents into the container at /app
 COPY . .
