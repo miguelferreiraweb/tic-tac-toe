@@ -5,12 +5,12 @@ on:
     types: [reopened, opened, synchronize, edited]
   push:
     branches:
-      - development
+      # - development (discontinued due to "free version" billing costs blocking deployment on fly.io).
       - master
 
 env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   TIC_TAC_TOE_VERCEL_TOKEN: ${{ secrets.TIC_TAC_TOE_VERCEL_TOKEN }}
+  # FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   build:
@@ -49,7 +49,7 @@ jobs:
           pnpm i --frozen-lockfile
 
     - name: Lint and Test Composite Action
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: ./.github/actions/lint_and_test
 
     - name: Build application
@@ -59,7 +59,7 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
