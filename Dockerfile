@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:20.9.0-alpine
+FROM node:20.16-alpine
 
 # Set the default value to 'production', but it's possible to override during docker build.
 ARG NODE_ENV=production
