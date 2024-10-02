@@ -1,7 +1,11 @@
 html,
 body {
+  height: 100%;
   padding: 0;
   margin: 0;
+  color: white;
+  background: black;
+  color-scheme: dark;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -25,12 +29,7 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+:root {
+  --player-x-color: #cd5c5c;
+  --player-o-color: #87cefa;
 }

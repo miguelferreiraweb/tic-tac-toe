@@ -1,4 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Live App Urls
+
+PROD:
+
+[https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/](https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/)
+
+~~https://tic-tac-toe-prod.fly.dev~~
+
+DEV:
+
+~~https://tic-tac-toe-dev.fly.dev~~
+(deployment to DEV discontinued due to "free version" billing costs blocking deployment on fly.io website. The idea of having two environments was just for practice purposes).
 
 ## Getting Started
 
@@ -32,20 +43,6 @@ docker run -p 3000:3000 tic-tac-toe
 ## SonarCloud
 
 [https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe](https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe)
-
-## App Urls
-
-~~DEV: [https://tic-tac-toe-dev.fly.dev](https://tic-tac-toe-dev.fly.dev)~~ (deployment to dev discontinued due to "free version" billing costs blocking deployment on fly.io website).
-
-PROD:
-
-[https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/](https://tic-tac-toe-miguelferreirawebs-projects.vercel.app/)
-
-~~[https://tic-tac-toe-prod.fly.dev](https://tic-tac-toe-prod.fly.dev)~~
-
-## Kanban Board
-
-[https://miguelferreiraweb.atlassian.net/jira/software/projects/TIC/boards/1](https://miguelferreiraweb.atlassian.net/jira/software/projects/TIC/boards/1)
 
 ## Screenshots Preview
 

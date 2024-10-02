@@ -1,13 +1,13 @@
 'use client';
 
-import clsx from 'clsx';
-import { NextPage } from 'next';
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
 
-import styles from '@/styles/Home.module.scss';
-import { BOARD_CELLS, INITIAL_RESTART_COUNTER, INTERVAL_TIMER_MS } from '@/utils/constants/board';
+import Board from '[lang]/components/Home/Board';
+import GameOptions from '[lang]/components/Home/GameOptions';
+import GameStatus from '[lang]/components/Home/GameStatus';
+import styles from '@/styles/pages/Home/Home.module.scss';
+import { INITIAL_RESTART_COUNTER, INTERVAL_TIMER_MS } from '@/utils/constants/board';
 import {
   BoardSymbolEnum,
   BoardSymbolType,
@@ -19,15 +19,13 @@ import {
   getRandomStartingPlayer,
 } from '@/utils/functions/calculateRoundResult';
 
-const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
-
-const Home: NextPage = (): JSX.Element => {
+export default function Home() {
+  const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
   const [board, setBoard] = useState<BoardSymbolType[]>(BOARD_INITIAL_STATE);
   const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(getRandomStartingPlayer());
   const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
   const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
-  const t = useTranslations('home');
 
   useEffect(() => {
     let intervalId: NodeJS.Timer;
@@ -94,71 +92,20 @@ const Home: NextPage = (): JSX.Element => {
     }
   };
 
-  // Renders
-
-  const renderBoard = (): JSX.Element => (
-    <div className={styles.boardContainer}>
-      {[...Array(BOARD_CELLS)].map((_item, index: number) => (
-        <button
-          key={uuidv4()}
-          className={`${styles.cell} ${styles[`cell--${index}`]}`}
-          onClick={() => handleCellClick(index)}
-        >
-          {renderCellItem(board[index])}
-        </button>
-      ))}
-    </div>
-  );
-
-  const renderCellItem = (item: string): JSX.Element => (
-    <span className={item === BoardSymbolEnum.PlayerX ? styles.playerX : styles.playerO}>
-      {item}
-    </span>
-  );
-
-  const renderRoundStatusMsg = (): JSX.Element =>
-    roundStatus === RoundStatusEnum.Draw ? (
-      <span>{t('its-a-draw')}</span>
-    ) : (
-      <span className={styles.winnerText}>
-        {t('player')}&nbsp;{currentPlayer} {t('won')}!
-      </span>
-    );
-
   return (
-    <div className={styles.homeContainer}>
-      <main className={styles.main}>
-        <div className={styles.start}>
-          {isRoundFinished ? (
-            renderRoundStatusMsg()
-          ) : (
-            <>
-              {t('its-turn-of')} {currentPlayer}!
-            </>
-          )}
-        </div>
-        {renderBoard()}
-        <div className={styles.restart}>
-          <button
-            onClick={handleRestartGameClick}
-            className={clsx(styles.restartBtn, {
-              [styles['restartBtn--disabled']]: isBoardEmpty(),
-              [styles['restartBtn--reset']]: isRoundFinished,
-            })}
-            disabled={isBoardEmpty()}
-          >
-            {isRoundFinished ? (
-              <>
-                {t('restarting')} {restartCounter}
-              </>
-            ) : (
-              t('restart')
-            )}
-          </button>
-        </div>
-      </main>
-    </div>
+    <main className={styles.homeContainer}>
+      <GameStatus
+        isRoundFinished={isRoundFinished}
+        currentPlayer={currentPlayer}
+        roundStatus={roundStatus}
+      />
+      <Board board={board} handleCellClick={handleCellClick} />
+      <GameOptions
+        handleRestartGameClick={handleRestartGameClick}
+        isBoardEmpty={isBoardEmpty}
+        restartCounter={restartCounter}
+        isRoundFinished={isRoundFinished}
+      />
+    </main>
   );
-};
-
-export default Home;
+}
