@@ -11,6 +11,11 @@ DEV:
 ~~https://tic-tac-toe-dev.fly.dev~~
 (deployment to DEV discontinued due to "free version" billing costs blocking deployment on fly.io website. The idea of having two environments was just for practice purposes).
 
+## App Preview
+
+<img src="/screenshots/player_turn.png" width="50%" height="50%" />
+<img src="/screenshots/victory.png" width="50%" height="50%" />
+
 ## Getting Started
 
 First, run the development server:
@@ -43,8 +48,3 @@ docker run -p 3000:3000 tic-tac-toe
 ## SonarCloud
 
 [https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe](https://sonarcloud.io/project/overview?id=miguelferreiraweb_tic-tac-toe)
-
-## Screenshots Preview
-
-<img src="/screenshots/player_turn.png" width="50%" height="50%" />
-<img src="/screenshots/victory.png" width="50%" height="50%" />

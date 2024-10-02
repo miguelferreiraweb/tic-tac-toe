@@ -1,21 +1,16 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { useGame } from '@/hooks/useGame';
 import styles from '@/styles/pages/Home/components/GameStatus.module.scss';
-import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
+import { LOCALES } from '@/utils/constants/board';
+import { RoundStatusEnum } from '@/utils/entities/board';
 
-interface GameStatusProps {
-  isRoundFinished: boolean;
-  currentPlayer: BoardSymbolType;
-  roundStatus: RoundStatusType;
-}
-
-export default function GameStatus({
-  isRoundFinished,
-  currentPlayer,
-  roundStatus,
-}: GameStatusProps) {
-  const t = useTranslations('home');
+export default function GameStatus() {
+  const {
+    state: { isRoundFinished, currentPlayer, roundStatus },
+  } = useGame();
+  const t = useTranslations(LOCALES.HOME);
 
   const renderRoundStatusMsg = (): JSX.Element =>
     roundStatus === RoundStatusEnum.Draw ? (

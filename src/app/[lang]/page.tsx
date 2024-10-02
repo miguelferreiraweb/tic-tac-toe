@@ -6,25 +6,25 @@ import React from 'react';
 import Board from '[lang]/components/Home/Board';
 import GameOptions from '[lang]/components/Home/GameOptions';
 import GameStatus from '[lang]/components/Home/GameStatus';
+import { useGame } from '@/hooks/useGame';
+import {
+  getFinishRoundAction,
+  getUpdateBoardAction,
+  getUpdateCurrentPlayerAction,
+} from '@/store/Game/gameActions';
 import styles from '@/styles/pages/Home/Home.module.scss';
-import { INITIAL_RESTART_COUNTER, INTERVAL_TIMER_MS } from '@/utils/constants/board';
 import {
-  BoardSymbolEnum,
-  BoardSymbolType,
-  RoundStatusEnum,
-  RoundStatusType,
-} from '@/utils/entities/board';
-import {
-  calculateRoundResult,
-  getRandomStartingPlayer,
-} from '@/utils/functions/calculateRoundResult';
+  BOARD_INITIAL_STATE,
+  INITIAL_RESTART_COUNTER,
+  INTERVAL_TIMER_MS,
+} from '@/utils/constants/board';
+import { BoardSymbolEnum } from '@/utils/entities/board';
 
 export default function Home() {
-  const BOARD_INITIAL_STATE: BoardSymbolType[] = ['', '', '', '', '', '', '', '', ''];
-  const [board, setBoard] = useState<BoardSymbolType[]>(BOARD_INITIAL_STATE);
-  const [currentPlayer, setCurrentPlayer] = useState<BoardSymbolType>(getRandomStartingPlayer());
-  const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
-  const [roundStatus, setRoundStatus] = useState<RoundStatusType>(RoundStatusEnum.Pending);
+  const {
+    state: { isRoundFinished, currentPlayer },
+    dispatch,
+  } = useGame();
   const [restartCounter, setRestartCounter] = useState<number>(INITIAL_RESTART_COUNTER);
 
   useEffect(() => {
@@ -47,65 +47,23 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRoundFinished, restartCounter]);
 
-  const updateBoard = (index: number): void => {
-    let updatedBoard: BoardSymbolType[] = [...board];
-    updatedBoard[index] = currentPlayer;
-    setBoard(updatedBoard);
-    const result: RoundStatusType = calculateRoundResult(updatedBoard);
-
-    result === RoundStatusEnum.Finished || result === RoundStatusEnum.Draw
-      ? setIsRoundFinished(true)
-      : updateNextPlayerTurn();
-
-    setRoundStatus(result);
-  };
-
-  const updateNextPlayerTurn = (): void =>
-    currentPlayer === BoardSymbolEnum.PlayerX
-      ? setCurrentPlayer(BoardSymbolEnum.PlayerO)
-      : setCurrentPlayer(BoardSymbolEnum.PlayerX);
-
-  const isCellEmpty = (index: number): boolean => !board[index];
-
-  const isBoardEmpty = (): boolean =>
-    !board.includes(BoardSymbolEnum.PlayerX) && !board.includes(BoardSymbolEnum.PlayerO);
-
   const resetGame = (): void => {
-    setBoard(BOARD_INITIAL_STATE);
-    setCurrentPlayer(
-      currentPlayer === BoardSymbolEnum.PlayerX ? BoardSymbolEnum.PlayerO : BoardSymbolEnum.PlayerX
+    dispatch(getUpdateBoardAction(BOARD_INITIAL_STATE));
+    dispatch(
+      getUpdateCurrentPlayerAction(
+        currentPlayer === BoardSymbolEnum.PlayerX
+          ? BoardSymbolEnum.PlayerO
+          : BoardSymbolEnum.PlayerX
+      )
     );
-    setIsRoundFinished(false);
-  };
-
-  // Handlers
-
-  const handleCellClick = (index: number): void => {
-    if (isCellEmpty(index) && !isRoundFinished) {
-      updateBoard(index);
-    }
-  };
-
-  const handleRestartGameClick = (): void => {
-    if (!isBoardEmpty() && !isRoundFinished) {
-      resetGame();
-    }
+    dispatch(getFinishRoundAction(false));
   };
 
   return (
     <main className={styles.homeContainer}>
-      <GameStatus
-        isRoundFinished={isRoundFinished}
-        currentPlayer={currentPlayer}
-        roundStatus={roundStatus}
-      />
-      <Board board={board} handleCellClick={handleCellClick} />
-      <GameOptions
-        handleRestartGameClick={handleRestartGameClick}
-        isBoardEmpty={isBoardEmpty}
-        restartCounter={restartCounter}
-        isRoundFinished={isRoundFinished}
-      />
+      <GameStatus />
+      <Board />
+      <GameOptions resetGame={resetGame} restartCounter={restartCounter} />
     </main>
   );
 }
