@@ -1,0 +1,36 @@
+@import '_mixins.module.scss';
+
+$restartBtn_font_size: (
+  desktop: 1.5rem,
+  mobile: 1.3rem,
+);
+
+.gameOptionsContainer {
+  margin-top: 5vh;
+
+  .restartBtn {
+    border: 1px solid #1e90ff;
+    border-radius: 10px;
+    background-color: #87ceeb;
+    cursor: pointer;
+    font-size: map-get($restartBtn_font_size, desktop);
+
+    @include mobile-all {
+      font-size: map-get($restartBtn_font_size, mobile);
+    }
+
+    &--disabled {
+      border-radius: 10px;
+      border: 1px solid #808080;
+      background-color: unset;
+    }
+
+    &--reset {
+      background-color: #ffff00;
+      color: #808080;
+      border: 1px solid #000000;
+      opacity: 0.8;
+      cursor: unset;
+    }
+  }
+}

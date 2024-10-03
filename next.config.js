@@ -1,9 +1,14 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
   reactStrictMode: true,
-  i18n,
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src', 'app', 'styles')],
+  },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

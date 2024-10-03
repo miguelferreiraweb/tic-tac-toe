@@ -1,0 +1,94 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home > should render homepage unchanged 1`] = `
+<div>
+  <main
+    class="_homeContainer_31fed9"
+  >
+    <div
+      class="_statusContainer_9cc73a"
+    >
+      home.its-turn-of
+       
+      X
+    </div>
+    <div
+      class="_boardContainer_292560"
+    >
+      <button
+        class="_cell_292560 _cell--0_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--1_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--2_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--3_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--4_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--5_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--6_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--7_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+      <button
+        class="_cell_292560 _cell--8_292560"
+      >
+        <span
+          class="_playerO_292560"
+        />
+      </button>
+    </div>
+    <div
+      class="_gameOptionsContainer_db5309"
+    >
+      <button
+        class="_restartBtn_db5309 _restartBtn--disabled_db5309"
+        disabled=""
+      >
+        home.restart
+      </button>
+    </div>
+  </main>
+</div>
+`;

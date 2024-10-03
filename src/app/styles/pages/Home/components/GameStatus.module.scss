@@ -1,0 +1,19 @@
+@import '_mixins.module.scss';
+
+$start_font_size: (
+  desktop: 2rem,
+  mobile: 1.5rem,
+);
+
+.statusContainer {
+  margin-bottom: 5vh;
+  font-size: map-get($start_font_size, desktop);
+
+  .winnerText {
+    color: #90ee90;
+  }
+
+  @include mobile-all {
+    font-size: map-get($start_font_size, mobile);
+  }
+}

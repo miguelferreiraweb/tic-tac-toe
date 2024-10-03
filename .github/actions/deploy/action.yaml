@@ -1,5 +1,5 @@
 name: Deployment Composite Action
-description: Deploys app to DEV or PROD depending on the branch
+description: Deploy app # (deployment to dev discontinued due to "free version" billing costs blocking deployment on fly.io).
 inputs:
   vercel_token:
     description: 'Vercel token'
@@ -10,24 +10,24 @@ runs:
     - name: Set up flyctl
       uses: superfly/flyctl-actions/setup-flyctl@master
 
-    - name: Deploy to DEV
-      if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-      run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
-      shell: bash
+    # - name: Deploy to DEV
+      # if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+      # run: flyctl deploy --app tic-tac-toe-dev --remote-only --ha=false
+      # shell: bash
 
-    - name: Deploy to PROD on Fly.io
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      run: flyctl deploy --app tic-tac-toe-prod --remote-only --ha=false
-      shell: bash
+    # - name: Deploy to PROD on Fly.io
+      # if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      # run: flyctl deploy --app tic-tac-toe-prod --remote-only --ha=false
+      # shell: bash
 
     - name: Setup pnpm
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: pnpm/action-setup@v2
       with:
-        version: 8.14.2
+        version: 9.11.0
         run_install: false
 
-    - name: Deploy to PROD on Vercel
+    - name: Deploy to Vercel
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         pnpm i --global vercel@latest

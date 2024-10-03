@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`App > should render app unchanged 1`] = `
-<div>
-  <div>
-    mock page
-  </div>
-</div>
-`;

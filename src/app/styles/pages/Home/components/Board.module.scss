@@ -1,0 +1,74 @@
+@import '_mixins.module.scss';
+
+$cell_width: (
+  desktop: 160px,
+  mobile: 100px,
+);
+
+.boardContainer {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, auto);
+
+  .playerX {
+    color: var(--player-x-color);
+  }
+
+  .playerO {
+    color: var(--player-o-color);
+  }
+
+  .cell {
+    border: 3px solid #ffffff;
+    background-color: unset;
+    font-size: 8rem;
+    width: map-get($cell_width, desktop);
+    height: map-get($cell_width, desktop);
+
+    @include mobile-all {
+      font-size: 5rem;
+      width: map-get($cell_width, mobile);
+      height: map-get($cell_width, mobile);
+    }
+
+    &--0 {
+      border-top: none;
+      border-left: none;
+    }
+
+    &--1 {
+      border-top: none;
+    }
+
+    &--2 {
+      @extend .cell--1;
+      border-right: none;
+    }
+
+    &--3 {
+      border-left: none;
+    }
+
+    &--4 {
+      @extend .cell;
+    }
+
+    &--5 {
+      border-right: none;
+    }
+
+    &--6 {
+      border-left: none;
+      border-bottom: none;
+    }
+
+    &--7 {
+      border-bottom: none;
+    }
+
+    &--8 {
+      @extend .cell--7;
+      border-right: none;
+    }
+  }
+}
