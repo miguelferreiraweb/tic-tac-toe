@@ -5,7 +5,6 @@ import React, { createContext, ReactNode, useReducer } from 'react';
 import { gameReducer } from '@/store/Game/gameReducers';
 import { BOARD_INITIAL_STATE } from '@/utils/constants/board';
 import { BoardSymbolType, RoundStatusEnum, RoundStatusType } from '@/utils/entities/board';
-import { getRandomStartingPlayer } from '@/utils/functions/calculateRoundResult';
 
 export interface GameContextState {
   currentPlayer: BoardSymbolType;
@@ -15,7 +14,7 @@ export interface GameContextState {
 }
 
 const initialState: GameContextState = {
-  currentPlayer: getRandomStartingPlayer(),
+  currentPlayer: 'X' as BoardSymbolType,
   isRoundFinished: false,
   board: BOARD_INITIAL_STATE,
   roundStatus: RoundStatusEnum.Pending,
