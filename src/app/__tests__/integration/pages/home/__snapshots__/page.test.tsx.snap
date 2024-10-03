@@ -10,7 +10,7 @@ exports[`Home > should render homepage unchanged 1`] = `
     >
       home.its-turn-of
        
-      O
+      X
     </div>
     <div
       class="_boardContainer_292560"
