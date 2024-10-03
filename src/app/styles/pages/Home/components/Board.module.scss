@@ -11,12 +11,14 @@ $cell_width: (
   grid-template-columns: repeat(3, 1fr);
   width: map-get($cell_width, desktop);
   height: map-get($cell_width, desktop);
-  max-width: 70vh;
-  max-height: 80vw;
+  max-width: map-get($cell_width, desktop);
+  max-height: map-get($cell_width, desktop);
 
   @include mobile-all {
     width: map-get($cell_width, mobile);
     height: map-get($cell_width, mobile);
+    max-width: map-get($cell_width, mobile);
+    max-height: map-get($cell_width, mobile);
   }
 
   .playerX {
