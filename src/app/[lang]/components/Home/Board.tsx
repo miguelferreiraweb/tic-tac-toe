@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { useGame } from '@/hooks/useGame';
 import {
@@ -53,15 +53,16 @@ export default function Board() {
   return (
     <div className={styles.boardContainer}>
       {[...Array(BOARD_CELLS)].map((_item, i: number) => (
-        <button
-          key={uuidv4()}
-          className={`${styles.cell} ${styles[`cell--${i}`]}`}
+        <div
+          key={`cell-${i}`}
+          className={clsx(`${styles.cell} ${styles[`cell--${i}`]}`, {
+            [styles.playerX]: board[i] === BoardSymbolEnum.PlayerX,
+            [styles.playerO]: board[i] === BoardSymbolEnum.PlayerO,
+          })}
           onClick={() => handleCellClick(i)}
         >
-          <span className={board[i] === BoardSymbolEnum.PlayerX ? styles.playerX : styles.playerO}>
-            {board[i]}
-          </span>
-        </button>
+          {board[i]}
+        </div>
       ))}
     </div>
   );

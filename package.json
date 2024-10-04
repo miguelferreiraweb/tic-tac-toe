@@ -28,8 +28,7 @@
     "prettier": "^3.2.4",
     "react": "19.0.0-rc-778e1ed2-20240926",
     "react-dom": "19.0.0-rc-778e1ed2-20240926",
-    "sass": "^1.70.0",
-    "uuid": "^9.0.1"
+    "sass": "^1.70.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.3.0",
